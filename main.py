@@ -7,63 +7,54 @@ entertainments = ["Movie", "Shopping", "Soccer Game", "Casino"]
 
 import random
 
-def dest_calc(destination):
-        destination = random.choice(destinations)
-        return destination
+def dest_calc():
+        result_of_random = random.choice(destinations)
+        return result_of_random
 
-destination = dest_calc(destinations)
-print(f'Destination: {destination}')
-
-def rest_calc(restaurant):
+def rest_calc():
         restaurant = random.choice(restaurants)
         return restaurant
 
-restaurant = rest_calc(restaurants)
-print(f'Restaurant: {restaurant}')
-
-def transp_calc(transportation):
-        transportation = random.choice(transportation)
+def transp_calc():
+        transportation = random.choice(transportations)
         return transportation
-transportation = transp_calc(transportations)
 
-print(f'Transportation: {transportation}')
-
-def entertainment_calc(entertainment):
+def entertainment_calc():
         entertainment = random.choice(entertainments)
         return entertainment
-entertainment = entertainment_calc(entertainments)
-
-print(f'Entertainment: {entertainment}')
 
 def unsatisfied_res():
         unsatisfied = input("What would you like to change? ")
         return(unsatisfied)
 
-def satisfaction_res_change():
+def satisfaction_res_change(destination, restaurant, transportation, entertainment):
         unsatisfied = unsatisfied_res()
         if unsatisfied == "destination" or unsatisfied == "Destination":
                 destinations.remove(destination)
-                dest_calc(destination)
+                destination = dest_calc()
                 print(f'New Destination: {destination}')
-                satisfaction_check()
-                unsatisfied_res()
+                satisfaction_check(destination, restaurant, transportation, entertainment)
         elif unsatisfied == "restaurant" or unsatisfied == "Restaurant":
                 restaurants.remove(restaurant)
-                rest_calc(restaurant)
+                restaurant = rest_calc()
                 print(f'New Restaurant: {restaurant}')
+                satisfaction_check(destination, restaurant, transportation, entertainment)
         elif unsatisfied == "transportation" or unsatisfied == "Transportation":
                 transportations.remove(transportation)
-                transp_calc(transportation)
+                transportation = transp_calc()
                 print(f'New Transportation: {transportation}')
+                satisfaction_check(destination, restaurant, transportation, entertainment)
         elif unsatisfied == "entertainment" or unsatisfied =="Entertainment":
                 entertainments.remove(entertainment)
-                entertainment_calc(entertainment)
+                entertainment = entertainment_calc()
                 print(f'New Entertainment: {entertainment}')
+                satisfaction_check(destination, restaurant, transportation, entertainment)
         else:
                 print("Please check your spelling.")
 
-def satisfaction_check():
+def satisfaction_check(destination, restaurant, transportation, entertainment):
         satisfaction = input("Are you satisfied with your trip? Y or N ")
+        
         if satisfaction == "Y" or satisfaction == "y":
                 print(f'Here is your final trip!')
                 print(f'Destination: {destination}')
@@ -71,9 +62,24 @@ def satisfaction_check():
                 print(f'Transportation: {transportation}')
                 print(f'Entertainment: {entertainment}')
         else:
-                satisfaction_res_change()
+                satisfaction_res_change(destination, restaurant, transportation, entertainment)
 
-satisfaction_check()
+def run_day_trip():
+        destination = dest_calc()
+        restaurant = rest_calc()
+        transportation = transp_calc()
+        entertainment = entertainment_calc()
+
+        print(f'Destination: {destination}')
+        print(f'Restaurant: {restaurant}')
+        print(f'Transportation: {transportation}')
+        print(f'Entertainment: {entertainment}')
+
+        satisfaction_check(destination, restaurant, transportation, entertainment)
+
+run_day_trip()
+
+
 
 
 
