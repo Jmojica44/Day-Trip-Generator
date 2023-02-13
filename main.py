@@ -7,6 +7,9 @@ entertainments = ["Movie", "Shopping", "Soccer Game", "Casino"]
 
 import random
 
+def get_random_item(items):
+        return random.choice(items)
+
 def dest_calc():
         result_of_random = random.choice(destinations)
         return result_of_random
@@ -31,22 +34,22 @@ def satisfaction_res_change(destination, restaurant, transportation, entertainme
         unsatisfied = unsatisfied_res()
         if unsatisfied == "destination" or unsatisfied == "Destination":
                 destinations.remove(destination)
-                destination = dest_calc()
+                destination = get_random_item(destinations)
                 print(f'New Destination: {destination}')
                 satisfaction_check(destination, restaurant, transportation, entertainment)
         elif unsatisfied == "restaurant" or unsatisfied == "Restaurant":
                 restaurants.remove(restaurant)
-                restaurant = rest_calc()
+                restaurant = get_random_item(restaurants)
                 print(f'New Restaurant: {restaurant}')
                 satisfaction_check(destination, restaurant, transportation, entertainment)
         elif unsatisfied == "transportation" or unsatisfied == "Transportation":
                 transportations.remove(transportation)
-                transportation = transp_calc()
+                transportation = get_random_item(transportations)
                 print(f'New Transportation: {transportation}')
                 satisfaction_check(destination, restaurant, transportation, entertainment)
         elif unsatisfied == "entertainment" or unsatisfied =="Entertainment":
                 entertainments.remove(entertainment)
-                entertainment = entertainment_calc()
+                entertainment = get_random_item(entertainments)
                 print(f'New Entertainment: {entertainment}')
                 satisfaction_check(destination, restaurant, transportation, entertainment)
         else:
@@ -65,10 +68,10 @@ def satisfaction_check(destination, restaurant, transportation, entertainment):
                 satisfaction_res_change(destination, restaurant, transportation, entertainment)
 
 def run_day_trip():
-        destination = dest_calc()
-        restaurant = rest_calc()
-        transportation = transp_calc()
-        entertainment = entertainment_calc()
+        destination = get_random_item(destinations)
+        restaurant = get_random_item(restaurants)
+        transportation = get_random_item(transportations)
+        entertainment = get_random_item(entertainments)
 
         print(f'Destination: {destination}')
         print(f'Restaurant: {restaurant}')
